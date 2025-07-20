@@ -1,27 +1,16 @@
+/*------Variables-------*/
+$gray: rgb(212, 211, 211);
+$beige: #e7d8c9;
+
 /*------Home Layout-------*/
-body{
-    padding: 0;
-    margin: 0;
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $beige;
 }
-.main-nav{
-    display: flex;
-    justify-content: space-between;
-    background-color: black;
-    align-items: center;
+.main-layout {
+  display: flex;
 }
-.nav-logo{
-    width: 9vw;
-    margin-left: 1vw;
-    color: white;
-}
-.main-nav-links{
-    display: flex;
-    justify-content: end;
-    width: 90vw;
-    list-style: none;
-    .link{
-        text-decoration: none;
-        color: white;
-        margin: 0 1.5rem;
-    }
-}
+
+@import "./navbar";
+@import "./home";

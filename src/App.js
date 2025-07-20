@@ -8,8 +8,10 @@ function App() {
     return (
       <div className="main-layout">
         <Navbar />
-        <Outlet />
-        <Footer />
+        <div className="content">
+          <Outlet />
+          <Footer />
+        </div>
       </div>
     );
   };

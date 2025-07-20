@@ -1,0 +1,31 @@
+.main-nav {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  width: 6rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  .nav-logo {
+    color: white;
+    margin-top: 10vh;
+  }
+  .main-nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    list-style: none;
+    padding: 0;
+    .link {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+    }
+  }
+}
