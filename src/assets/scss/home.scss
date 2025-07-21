@@ -1,13 +1,34 @@
+/*-----Home-----*/
+
 .home {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  .hero {
-    height: 100vh;
-    width: 94vw;
+  width: calc(100vw - 6rem);
+  z-index: 11;
+}
+/*-----Hero-----*/
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    font-size: $title;
+  }
+  .heading {
+    font-size: $heading;
   }
   .links-row {
     margin-bottom: 15vh;
+  }
+  .about-me-row {
+    width: 75%;
+  }
+  .about-me-text {
+    margin: 5px;
+    font-size: 40px;
   }
 }
