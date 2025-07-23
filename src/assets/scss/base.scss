@@ -4,6 +4,10 @@
 $gray: rgb(212, 211, 211);
 $beige: #e7d8c9;
 $turquoise: #007a72;
+$nightLightBlue: #263c83;
+$nightBlue: #1a2a5f;
+$nightLightPurple: #1b1a2d;
+$nightDarkPurple: #0a0910;
 /*---Font----*/
 $title: 70px;
 $heading: 25px;
@@ -48,3 +52,4 @@ body {
 @import "./about";
 @import "./projects";
 @import "./contact";
+@import "./animation";
