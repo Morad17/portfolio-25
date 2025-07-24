@@ -22,11 +22,14 @@ body {
   display: flex;
 }
 .page {
-  min-height: 100vh; // Changed from height to min-height
+  min-height: 100vh;
+  width: calc(100vw - 6rem);
+}
+.section-content {
   width: 100%;
-  max-width: 1200px; // Add max-width
-  margin: 0 auto; // Center the page
-  padding: 0 20px; // Add side padding
+  max-width: 1200px;
+  padding: 0 20px;
+  z-index: 111;
 
   @media (min-width: 768px) {
     padding: 0 40px;
