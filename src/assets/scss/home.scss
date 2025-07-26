@@ -15,6 +15,23 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  .section-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    z-index: 111;
+    @media (min-width: 768px) {
+      padding: 0 40px;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0 60px;
+    }
+  }
+
   .title {
     font-size: $title;
   }
@@ -24,11 +41,41 @@
   .links-row {
     margin-bottom: 15vh;
   }
-  .about-me-row {
-    width: 75%;
-  }
   .about-me-text {
     margin: 5px;
     font-size: 40px;
+  }
+  .center-section {
+    display: flex;
+    width: 75%;
+    .section-content {
+      width: 60%;
+    }
+    .model-row {
+      width: 40%;
+    }
+  }
+
+  /*----Sunset Parallax -----*/
+  .sunset-sun {
+    position: absolute;
+    top: 0;
+    left: -6rem;
+    width: 1920px;
+    height: 100vh;
+    background-position: bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: -20vh;
+    left: auto;
+    width: 500px;
+    height: 500px;
+    background-position: bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
 }
