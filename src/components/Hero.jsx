@@ -19,7 +19,7 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  const backgroundY = useTransfs ee4e orm(smoothProgress, [0, 1], ["0%", "280%"]);
+  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "280%"]);
   const backgroundX = useTransform(smoothProgress, [0, 1], ["0%", "-120%"]);
 
   return (
