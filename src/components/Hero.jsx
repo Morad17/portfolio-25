@@ -39,6 +39,7 @@ const Hero = () => {
             <h2 className="title">Hi I'm Morad</h2>
             <h3 className="heading">a Frontend Developer</h3>
           </div>
+
           <div className="center-row">
             <div className="about-me-row-left">
               <p className="about-me-text">Where creativity meets code.</p>
@@ -46,22 +47,34 @@ const Hero = () => {
                 Crafting thoughtful digital solutions.
               </p>
               <p className="about-me-text">
-                Aesthetics and funcitonality at the core of each project.
+                Aesthetics and functionality at the core of each project.
               </p>
             </div>
-            <div className="robot-model-row">
+
+            <motion.div
+              className="robot-model-row"
+              initial={{ x: "-150vw" }} // Start off-screen left
+              animate={{ x: 0 }} // Move to center
+              transition={{
+                duration: 5,
+                delay: 0.5, // Wait 1 second before starting
+                ease: "easeOut",
+              }}
+            >
               <Canvas
-                camera={{ position: [1, 0, 4] }}
+                camera={{ position: [1, 1, 4] }}
                 style={{ width: "100%", height: "100%" }}
               >
+                <OrbitControls enableZoom={false} enablePan={false} />
                 <Environment preset="warehouse" />
                 <Robot
                   scale={[1.75, 1.75, 1.75]}
                   position={[0, -2, 0]}
-                  rotation={[5.2, 0, -Math.PI / -7]}
+                  rotation={[0, 0, 0]}
                 />
               </Canvas>
-            </div>
+            </motion.div>
+
             <div className="about-me-row-right">
               <p className="about-me-text">From concept to code.</p>
               <p className="about-me-text">Turning bold ideas into reality.</p>
@@ -78,7 +91,7 @@ const Hero = () => {
           <Environment preset="dawn" />
           <Spaceman
             scale={[1.5, 1.5, 1.5]}
-            rotation={[Math.PI / -4, 0, -Math.PI / -7]} // Added Z-axis tilt (-15 degrees)
+            rotation={[Math.PI / -4, 0, 0]} // Added Z-axis tilt (-15 degrees)
           />
         </Canvas>
       </div>

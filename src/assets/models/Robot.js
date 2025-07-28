@@ -8,6 +8,7 @@ Title: Animated ROBOT SDC
 
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useSpring, animated } from "@react-spring/three";
 import robot from "./animated_robot_sdc.glb";
 
 export function Robot(props) {
@@ -15,20 +16,41 @@ export function Robot(props) {
   const { nodes, materials, animations } = useGLTF(robot);
   const { actions } = useAnimations(animations, group);
 
+  // Spring animation for rotation - use Z-axis instead of Y-axis
+  const { rotationY } = useSpring({
+    from: { rotationY: Math.PI / 2 }, // Start facing right (walking direction)
+    to: { rotationY: 0 }, // Turn 90° left to face viewer
+    delay: 5000,
+    config: { duration: 1000 },
+  });
+
   useEffect(() => {
     if (animations.length > 0) {
       const firstAnimation = Object.keys(actions)[0];
-      actions[firstAnimation]?.play();
+      const action = actions[firstAnimation];
+
+      if (action) {
+        action.play();
+        setTimeout(() => {
+          action.paused = true;
+          action.time = 1.41;
+        }, 5500);
+      }
     }
   }, [actions, animations]);
 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <animated.group
+      ref={group}
+      {...props}
+      rotation-y={rotationY}
+      dispose={null}
+    >
       <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0.5, 0]}>
+        <group name="Sketchfab_model" rotation={[0, 0, 0]}>
           <group name="root">
-            <group name="GLTF_SceneRootNode" rotation={[Math.PI / 1.1, 0, 0]}>
-              <group name="Armature_82" rotation={[0, 0.5, 0]}>
+            <group name="GLTF_SceneRootNode" rotation={[0, 0, 0]}>
+              <group name="Armature_82" rotation={[0, 0, 0]}>
                 <group name="GLTF_created_0">
                   <primitive object={nodes.GLTF_created_0_rootJoint} />
                   <skinnedMesh
@@ -44,7 +66,7 @@ export function Robot(props) {
           </group>
         </group>
       </group>
-    </group>
+    </animated.group>
   );
 }
 

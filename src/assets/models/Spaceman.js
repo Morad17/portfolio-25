@@ -10,7 +10,7 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import model from "./little-astronaut.glb";
 
-export function Spaceman(props) {
+export function Spaceman({ onLoad, ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(model);
   const { actions } = useAnimations(animations, group);
@@ -21,6 +21,13 @@ export function Spaceman(props) {
       actions[firstAnimation]?.play();
     }
   }, [actions, animations]);
+
+  useEffect(() => {
+    // Trigger onLoad when model is ready
+    if (nodes && materials && onLoad) {
+      onLoad();
+    }
+  }, [nodes, materials, onLoad]);
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -69,6 +76,7 @@ export function Spaceman(props) {
   );
 }
 
+// Preload the model
 useGLTF.preload(model);
 
 // rembrandt
