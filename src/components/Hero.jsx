@@ -9,6 +9,7 @@ import sun from "../assets/images/sunset-sun.png";
 
 const Hero = () => {
   const ref = useRef();
+  //Animate Sun
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -19,7 +20,6 @@ const Hero = () => {
     damping: 30,
     restDelta: 0.001,
   });
-
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "350%"]);
   const backgroundX = useTransform(smoothProgress, [0, 1], ["0%", "-170%"]);
 
@@ -51,28 +51,27 @@ const Hero = () => {
               </p>
             </div>
 
-            <motion.div
-              className="robot-model-row"
-              initial={{ x: "-150vw" }} // Start off-screen left
-              animate={{ x: 0 }} // Move to center
-              transition={{
-                duration: 5,
-                delay: 0.5, // Wait 1 second before starting
-                ease: "easeOut",
-              }}
-            >
-              <Canvas
-                camera={{ position: [1, 1, 4] }}
-                style={{ width: "100%", height: "100%" }}
+            <motion.div className="robot-model-row">
+              <motion.div
+                animate={{ y: [0, -30, 0] }} // Float up and down
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
-                <OrbitControls enableZoom={false} enablePan={false} />
-                <Environment preset="warehouse" />
-                <Robot
-                  scale={[1.75, 1.75, 1.75]}
-                  position={[0, -2, 0]}
-                  rotation={[0, 0, 0]}
-                />
-              </Canvas>
+                <Canvas
+                  camera={{ position: [1, 1, 4] }}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <Environment preset="warehouse" />
+                  <Robot
+                    scale={[1.75, 1.75, 1.75]}
+                    position={[0, -2, 0]}
+                    rotation={[0, 0, 0]}
+                  />
+                </Canvas>
+              </motion.div>
             </motion.div>
 
             <div className="about-me-row-right">
@@ -89,10 +88,7 @@ const Hero = () => {
           style={{ width: "100%", height: "100%" }}
         >
           <Environment preset="dawn" />
-          <Spaceman
-            scale={[1.5, 1.5, 1.5]}
-            rotation={[Math.PI / -4, 0, 0]} // Added Z-axis tilt (-15 degrees)
-          />
+          <Spaceman scale={[1.5, 1.5, 1.5]} rotation={[Math.PI / -4, 0, 0]} />
         </Canvas>
       </div>
     </div>

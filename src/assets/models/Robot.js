@@ -6,22 +6,58 @@ Source: https://sketchfab.com/3d-models/animated-robot-sdc-3d127f327a6c4033a32b8
 Title: Animated ROBOT SDC
 */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Vector2, Vector3 } from "three";
 import robot from "./animated_robot_sdc.glb";
 
 export function Robot(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(robot);
   const { actions } = useAnimations(animations, group);
+  const { camera, size } = useThree();
+  const [mouse, setMouse] = useState(new Vector2());
+  const headBone = useRef();
 
-  // Spring animation for rotation - use Z-axis instead of Y-axis
-  const { rotationY } = useSpring({
-    from: { rotationY: Math.PI / 2 }, // Start facing right (walking direction)
-    to: { rotationY: 0 }, // Turn 90° left to face viewer
-    delay: 5000,
-    config: { duration: 1000 },
+  useEffect(() => {
+    if (nodes.GLTF_created_0_rootJoint) {
+      const skeleton = nodes.GLTF_created_0_rootJoint;
+
+      skeleton.traverse((bone) => {
+        if (bone.name === "Tete_2") {
+          headBone.current = bone;
+          console.log("Found head bone:", bone.name);
+
+          // Set initial neutral position (correct the 40-degree offset)
+          bone.rotation.y = -Math.PI * 0.22;
+          bone.rotation.x = 0;
+        }
+      });
+    }
+  }, [nodes]);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMouse(
+        new Vector2(
+          (event.clientX / size.width) * 2 - 1,
+          -(event.clientY / size.height) * 2 + 1
+        )
+      );
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [size]);
+
+  useFrame(() => {
+    if (headBone.current) {
+      const baseRotationY = -Math.PI * 0.22;
+      const mouseRotationY = mouse.x * 0.3;
+      headBone.current.rotation.y = baseRotationY + mouseRotationY;
+    }
   });
 
   useEffect(() => {
@@ -31,21 +67,14 @@ export function Robot(props) {
 
       if (action) {
         action.play();
-        setTimeout(() => {
-          action.paused = true;
-          action.time = 1.41;
-        }, 5500);
+        action.paused = true;
+        action.time = 0.51;
       }
     }
   }, [actions, animations]);
 
   return (
-    <animated.group
-      ref={group}
-      {...props}
-      rotation-y={rotationY}
-      dispose={null}
-    >
+    <animated.group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[0, 0, 0]}>
           <group name="root">
