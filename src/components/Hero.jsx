@@ -25,6 +25,7 @@ const Hero = () => {
 
   return (
     <div className="hero page" ref={ref}>
+      <div className="background-wrapper"></div>
       <motion.div
         className="sunset-sun"
         style={{
@@ -36,19 +37,59 @@ const Hero = () => {
       <section className="center-section">
         <div className="section-content">
           <div className="title-row">
-            <h2 className="title">Hi I'm Morad</h2>
-            <h3 className="heading">a Frontend Developer</h3>
+            <h2 className="title">Morad Inc</h2>
+            <h3 className="heading">Frontend Development</h3>
           </div>
 
           <div className="center-row">
             <div className="about-me-row-left">
-              <p className="about-me-text">Where creativity meets code.</p>
-              <p className="about-me-text">
-                Crafting thoughtful digital solutions.
-              </p>
-              <p className="about-me-text">
-                Aesthetics and functionality at the core of each project.
-              </p>
+              <motion.div
+                initial={{ x: 0 }}
+                animate={{ x: "100%" }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                  repeatType: "loop",
+                }}
+                className="scroll-text"
+              >
+                <p className="about-me-text-1">Where creativity meets code.</p>
+              </motion.div>
+              <div className="scroll-text  reverse-scroll">
+                <motion.p className="about-me-text-1">
+                  Crafting thoughtful digital solutions.
+                </motion.p>
+                <motion.p className="about-me-text-2">
+                  Crafting thoughtful digital solutions.
+                </motion.p>
+              </div>
+              <div className="scroll-text">
+                <motion.p
+                  initial={{ x: 0 }}
+                  animate={{ x: "-100%" }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="about-me-text-1"
+                >
+                  Aesthetics and functionality at the core of each project.
+                </motion.p>
+                <motion.p
+                  initial={{ x: 0 }}
+                  animate={{ x: "-100%" }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="about-me-text-2"
+                >
+                  Aesthetics and functionality at the core of each project.
+                </motion.p>
+              </div>
             </div>
 
             <motion.div className="robot-model-row">
