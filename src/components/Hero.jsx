@@ -9,10 +9,18 @@ import sun from "../assets/images/sunset-sun.png";
 
 const Hero = () => {
   const ref = useRef();
-  //Animate Sun
+  const marqueeRef = useRef();
+
+  // Animate Sun
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
+  });
+
+  // Marquee scroll animation - Make sure marqueeRef is attached to an element
+  const { scrollYProgress: marqueeProgress } = useScroll({
+    target: marqueeRef,
+    offset: ["start end", "end start"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
@@ -20,8 +28,13 @@ const Hero = () => {
     damping: 30,
     restDelta: 0.001,
   });
+
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "350%"]);
   const backgroundX = useTransform(smoothProgress, [0, 1], ["0%", "-170%"]);
+
+  // Marquee animations based on scroll
+  const marqueeX1 = useTransform(marqueeProgress, [0, 1], ["100%", "-100%"]);
+  const marqueeX2 = useTransform(marqueeProgress, [0, 1], ["-50%", "100%"]);
 
   return (
     <div className="hero page" ref={ref}>
@@ -35,102 +48,73 @@ const Hero = () => {
         }}
       />
       <section className="center-section">
-        <div className="section-content">
+        <div className="center-row">
           <div className="title-row">
-            <h2 className="title">Morad Inc</h2>
-            <h3 className="heading">Frontend Development</h3>
+            <h2 className="title">
+              Morad Inc
+              <div className="border" />
+            </h2>
+            <h3 className="heading">
+              Frontend Development
+              <div className="border" />
+            </h3>
           </div>
-
-          <div className="center-row">
-            <div className="about-me-row-left">
-              <motion.div
-                initial={{ x: 0 }}
-                animate={{ x: "100%" }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatType: "loop",
-                }}
-                className="scroll-text"
-              >
-                <p className="about-me-text-1">Where creativity meets code.</p>
-              </motion.div>
-              <div className="scroll-text  reverse-scroll">
-                <motion.p className="about-me-text-1">
-                  Crafting thoughtful digital solutions.
-                </motion.p>
-                <motion.p className="about-me-text-2">
-                  Crafting thoughtful digital solutions.
-                </motion.p>
-              </div>
-              <div className="scroll-text">
-                <motion.p
-                  initial={{ x: 0 }}
-                  animate={{ x: "-100%" }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="about-me-text-1"
-                >
-                  Aesthetics and functionality at the core of each project.
-                </motion.p>
-                <motion.p
-                  initial={{ x: 0 }}
-                  animate={{ x: "-100%" }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="about-me-text-2"
-                >
-                  Aesthetics and functionality at the core of each project.
-                </motion.p>
-              </div>
-            </div>
-
-            <motion.div className="robot-model-row">
-              <motion.div
-                animate={{ y: [0, -30, 0] }} // Float up and down
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Canvas
-                  camera={{ position: [1, 1, 4] }}
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  <Environment preset="warehouse" />
-                  <Robot
-                    scale={[1.75, 1.75, 1.75]}
-                    position={[0, -2, 0]}
-                    rotation={[0, 0, 0]}
-                  />
-                </Canvas>
-              </motion.div>
-            </motion.div>
-
-            <div className="about-me-row-right">
-              <p className="about-me-text">From concept to code.</p>
-              <p className="about-me-text">Turning bold ideas into reality.</p>
-              <p className="about-me-text">Thats all.</p>
-            </div>
+          <div className="about-me-row">
+            <h3 className="about-me-text">
+              Where creativity meets code.
+              <div className="border" />
+            </h3>
+            <h3 className="about-me-text">
+              Crafting thoughtful digital solutions <div className="border" />
+            </h3>
+            <h3 className="about-me-text">
+              that are Aesthetic and functional at the core.
+              <div className="border" />
+            </h3>
           </div>
         </div>
+
+        <motion.div className="robot-model-row">
+          <motion.div
+            animate={{ y: [0, -30, 0] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Canvas
+              camera={{ position: [1, 1, 4] }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <Environment preset="warehouse" />
+              <Robot
+                scale={[1.75, 1.75, 1.75]}
+                position={[0, -2, 0]}
+                rotation={[0, 0, 0]}
+              />
+            </Canvas>
+          </motion.div>
+        </motion.div>
       </section>
-      <div className="spaceman-model-row">
-        <Canvas
-          camera={{ position: [1, 1, 3] }}
-          style={{ width: "100%", height: "100%" }}
-        >
-          <Environment preset="dawn" />
-          <Spaceman scale={[1.5, 1.5, 1.5]} rotation={[Math.PI / -4, 0, 0]} />
-        </Canvas>
+
+      {/* IMPORTANT: Attach marqueeRef to this container */}
+      <div className="marquee-container" ref={marqueeRef}>
+        <div className="bottom-row">
+          <div className="marquee">
+            <motion.h2 style={{ x: marqueeX1 }} className="marquee-text">
+              Concept to code | Turning bold ideas into reality |
+            </motion.h2>
+          </div>
+        </div>
+
+        <div className="bottom-row">
+          <div className="marquee">
+            <motion.h2 style={{ x: marqueeX2 }} className="marquee-text">
+              Concept to code | Turning bold ideas into reality |
+            </motion.h2>
+          </div>
+        </div>
       </div>
     </div>
   );

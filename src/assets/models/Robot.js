@@ -28,8 +28,6 @@ export function Robot(props) {
       skeleton.traverse((bone) => {
         if (bone.name === "Tete_2") {
           headBone.current = bone;
-          console.log("Found head bone:", bone.name);
-
           // Set initial neutral position (correct the 40-degree offset)
           bone.rotation.y = -Math.PI * 0.22;
           bone.rotation.x = 0;
