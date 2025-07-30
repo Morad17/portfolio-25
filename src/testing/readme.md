@@ -8,7 +8,7 @@ delay: 5000,
 config: { duration: 1000 },
 });
 
-useEffect(() => {
+<!-- useEffect(() => {
 if (animations.length > 0) {
 const firstAnimation = Object.keys(actions)[0];
 const action = actions[firstAnimation];
@@ -23,4 +23,38 @@ const action = actions[firstAnimation];
     }
 
 }, [actions, animations]);
-rotation-y={rotationY}
+rotation-y={rotationY} -->
+
+//Marquee Left and Right
+
+<!--
+      <div className="bottom-row">
+        <div className="marquee">
+          <motion.h2
+            initial={{ x: "0" }}
+            animate={{ x: "-100%" }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+            className="marquee-text"
+          >
+            Concept to code | Turning bold ideas into reality |
+          </motion.h2>
+          <motion.h2
+            initial={{ x: "0" }}
+            animate={{ x: "-100%" }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+            className="marquee-text"
+          >
+            Concept to code| Turning bold ideas into reality |
+          </motion.h2>
+        </div>
+      </div> -->

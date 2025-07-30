@@ -68,7 +68,11 @@ const Hero = () => {
               Crafting thoughtful digital solutions <div className="border" />
             </h3>
             <h3 className="about-me-text">
-              that are Aesthetic and functional at the core.
+              Balancing aesthetics with function
+              <div className="border" />
+            </h3>
+            <h3 className="about-me-text">
+              Thats it.
               <div className="border" />
             </h3>
           </div>
@@ -111,7 +115,8 @@ const Hero = () => {
         <div className="bottom-row">
           <div className="marquee">
             <motion.h2 style={{ x: marqueeX2 }} className="marquee-text">
-              Concept to code | Turning bold ideas into reality |
+              Static Sites | E-commerce Sites | Databasing | SEO | Responsive
+              Designs
             </motion.h2>
           </div>
         </div>
