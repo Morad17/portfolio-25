@@ -7,6 +7,11 @@ import horizon from "../assets/images/sunset-horizon.png";
 import mountain from "../assets/images/sunset-mountain.png";
 import mountains from "../assets/images/sunset-mountains.png";
 import foreground from "../assets/images/sunset-foreground.png";
+//test scene 2
+import scene from "../assets/images/scene-1.png";
+import sceneForeground from "../assets/images/scene-foreground.png";
+import sceneMoon from "../assets/images/scene-moon-2.png";
+import sceneMountain from "../assets/images/scene-mountains.png";
 
 const About = () => {
   const ref = useRef();
@@ -113,20 +118,23 @@ const About = () => {
 
         <motion.div
           className="sunset-horizon"
-          style={{ backgroundImage: `url(${horizon})`, y: sHorizonY }}
+          style={{ backgroundImage: `url(${sceneMoon})`, y: sHorizonY }}
         />
         <motion.div
           className="sunset-mountains"
-          style={{ backgroundImage: `url(${mountains})`, y: sMountains }}
+          style={{ backgroundImage: `url(${sceneMountain})`, y: sMountains }}
         />
         <motion.div
           className="sunset-foreground"
-          style={{ backgroundImage: `url(${foreground})`, y: sForegroundY }}
+          style={{
+            backgroundImage: `url(${sceneForeground})`,
+            y: sForegroundY,
+          }}
         />
-        <motion.div
+        {/* <motion.div
           className="sunset-foreground"
-          style={{ backgroundImage: `url(${mountain})`, y: sMountain }}
-        />
+          style={{ backgroundImage: `url(${sMou})`, y: sMountain }}
+        /> */}
       </div>
     </div>
   );
