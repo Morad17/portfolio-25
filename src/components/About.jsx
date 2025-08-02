@@ -8,10 +8,10 @@ import mountain from "../assets/images/sunset-mountain.png";
 import mountains from "../assets/images/sunset-mountains.png";
 import foreground from "../assets/images/sunset-foreground.png";
 //test scene 2
-import scene from "../assets/images/scene-1.png";
-import sceneForeground from "../assets/images/scene-foreground.png";
+import sceneForeground from "../assets/images/sForeground.png";
 import sceneMoon from "../assets/images/scene-moon-2.png";
-import sceneMountain from "../assets/images/scene-mountains.png";
+import sceneMountain1 from "../assets/images/sMountain1.png";
+import sceneMountain2 from "../assets/images/sMountain2.png";
 
 const About = () => {
   const ref = useRef();
@@ -58,24 +58,29 @@ const About = () => {
   // Only apply background colors when About section is in view
   const backgroundColor = useTransform(
     smoothAboutProgress,
-    [0, 0.25, 0.5, 0.75, 1],
+    [0, 0.1, 0.2, 0.4, 0.5, 0.6],
     isInView
       ? [
+          // Stage 1: All blue
           "linear-gradient(to bottom, #3588c2, #3588c2, #3588c2, #3588c2)",
 
-          // Stage 1: Start replacing from bottom (sun moving down in Hero)
-          "linear-gradient(to bottom, #3588c2, #3588c2, #3588c2, rgb(9, 3, 72))",
+          // Stage 2: Start with blended transition color
+          "linear-gradient(to bottom, #3588c2, #3588c2, #2a5a8a, rgb(9, 3, 72))",
 
-          // Stage 2: Second color from bottom (sun entering About)
-          "linear-gradient(to bottom, #3588c2, #3588c2, rgb(9, 3, 72), rgb(115, 8, 69))",
+          // Stage 3: More blended intermediate colors
+          "linear-gradient(to bottom, #3588c2, #2a5a8a, rgb(62, 5, 38), rgb(115, 8, 69))",
 
-          // Stage 3: Third color (sun moving through About)
-          "linear-gradient(to bottom, #3588c2, rgb(9, 3, 72), rgb(115, 8, 69), rgb(160, 0, 41))",
+          // Stage 4: Continue blending
+          "linear-gradient(to bottom, #2a5a8a, rgb(62, 5, 38), rgb(137, 4, 55), rgb(160, 0, 41))",
 
-          // Stage 4: Full sunset (sun at bottom)
+          // Stage 5: Near sunset
+          "linear-gradient(to bottom, rgb(62, 5, 38), rgb(137, 4, 55), rgb(207, 47, 20), rgb(254, 95, 1))",
+
+          // Stage 6: Full sunset
           "linear-gradient(to bottom, rgb(9, 3, 72), rgb(115, 8, 69), rgb(160, 0, 41), rgb(254, 95, 1))",
         ]
       : [
+          "transparent",
           "transparent",
           "transparent",
           "transparent",
@@ -85,9 +90,8 @@ const About = () => {
   );
 
   // Parallax elements (existing code)
-  const sHorizonY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
-  const sMountains = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const sMountain = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
+  const sMountainY1 = useTransform(scrollYProgress, [0, 1], ["0%", "90%"]);
+  const sMountainY2 = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
   const sForegroundY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
 
@@ -115,22 +119,25 @@ const About = () => {
           others implemented based on the project. If you have a project in
           mind, or a killer idea send me a message!
         </motion.p>
-
-        <motion.div
+        {/* <motion.div
           className="sunset-horizon"
-          style={{ backgroundImage: `url(${sceneMoon})`, y: sHorizonY }}
+          style={{ backgroundImage: `url(${sHorizon})`, y: sHorizonY }}
+        /> */}
+        <motion.div
+          className="sunset-slide"
+          style={{ backgroundImage: `url(${sceneMountain1})`, y: sMountainY1 }}
         />
         <motion.div
-          className="sunset-mountains"
-          style={{ backgroundImage: `url(${sceneMountain})`, y: sMountains }}
+          className="sunset-slide"
+          style={{ backgroundImage: `url(${sceneMountain2})`, y: sMountainY2 }}
         />
         <motion.div
-          className="sunset-foreground"
+          className="sunset-slide"
           style={{
             backgroundImage: `url(${sceneForeground})`,
             y: sForegroundY,
           }}
-        />
+        />{" "}
         {/* <motion.div
           className="sunset-foreground"
           style={{ backgroundImage: `url(${sMou})`, y: sMountain }}

@@ -62,7 +62,7 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "350%"]);
+  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "400%"]);
   const backgroundX = useTransform(smoothProgress, [0, 1], ["0%", "-170%"]);
 
   // Marquee animations based on scroll
