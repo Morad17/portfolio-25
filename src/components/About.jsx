@@ -12,6 +12,7 @@ import sceneForeground from "../assets/images/sForeground.png";
 import sceneMoon from "../assets/images/scene-moon-2.png";
 import sceneMountain1 from "../assets/images/sMountain1.png";
 import sceneMountain2 from "../assets/images/sMountain2.png";
+import Particles from "./ParticleAnimation";
 
 const About = () => {
   const ref = useRef();
@@ -109,7 +110,9 @@ const About = () => {
           height: "100vh", // Full viewport height
           zIndex: -10,
         }}
-      />
+      >
+        <Particles particleCount={300} moveParticlesOnHover={true} />
+      </motion.div>
 
       <div className="sunset-parallax">
         <motion.p className="background-text" style={{ y: textY }}>
