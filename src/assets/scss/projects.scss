@@ -1,0 +1,85 @@
+.projects {
+  height: 100vh;
+  .title,
+  .title-caption {
+    padding-left: 5rem;
+  }
+  .title-caption {
+    font-size: 25px;
+    margin: 10px;
+  }
+  .projects-content {
+    padding-left: 5rem;
+    height: 100%;
+    display: flex;
+    gap: 2vw;
+  }
+  .project-cards {
+    height: 80vh;
+    display: flex;
+    justify-content: space-between;
+    gap: 2vh;
+    flex-direction: column;
+    .card {
+      border: 1px solid white;
+      border-radius: 10px;
+      max-width: 40vh;
+    }
+  }
+
+  .card-thumbnail {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .thumb {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .info-content {
+    display: flex;
+    gap: 1rem;
+  }
+  .project-info-container {
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 80vh;
+    padding: 0 1rem;
+  }
+  .gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    max-width: 900px;
+    border-radius: 10px;
+  }
+  .info-text-container {
+    max-width: 900px;
+    border-radius: 10px;
+    border: 1px solid white;
+  }
+  .info-text {
+    font-size: 25px;
+    padding: 10px 20px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .info-points {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+  }
+  .info-point {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    font-size: 23px;
+    border: 1px solid white;
+    border-radius: 10px;
+    svg {
+      font-size: 40px;
+      padding-right: 10px;
+    }
+  }
+}
