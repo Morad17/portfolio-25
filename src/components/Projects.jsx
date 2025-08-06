@@ -1,8 +1,11 @@
 import { useState } from "react";
-import hThumb from "../assets/images/horizon-thumb.png";
-import mThumb from "../assets/images/movie-binge-thumb.png";
+import { motion } from "framer-motion"; // Add this import
 import { IoIosPerson } from "react-icons/io";
 import { Link } from "react-router";
+
+//logo
+import hLogo from "../assets/images/horizon-sales-logo.png";
+import mLogo from "../assets/images/movie-binge-logo.png";
 
 //Gif
 import hGif from "../assets/gif/horizon-sales.gif";
@@ -117,34 +120,64 @@ const Projects = () => {
       <p className="title-caption">Select a project</p>
       <div className="projects-content">
         <div className="project-cards">
-          <div
+          <motion.div
             className={`card card-1 ${
               project === "horizonProject" ? "active" : ""
             }`}
             onClick={() => setProject("horizonProject")}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="image-container">
-              <img
+              <motion.img
                 className="card-thumbnail"
-                src={hThumb}
+                src={hLogo}
                 alt="Horizon Sales"
+                initial={{ y: 50, scale: 1, rotate: 0 }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.1,
+                  rotate: -6,
+                  zIndex: 10,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
               />
             </div>
-
             <h2 className="card-title">Horizon Sales</h2>
-          </div>
-          <div
+          </motion.div>
+
+          <motion.div
             className={`card card-2 ${
               project === "movieBingeProject" ? "active" : ""
             }`}
             onClick={() => setProject("movieBingeProject")}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="image-container">
-              <img className="card-thumbnail" src={mThumb} alt="Movie Binge" />
+              <motion.img
+                className="card-thumbnail"
+                src={mLogo}
+                alt="Movie Binge"
+                initial={{ y: 50, scale: 1, rotate: 0 }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.1,
+                  rotate: 9,
+                  zIndex: 10,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
-
-            <h2 className="card-title">Movie Binge</h2>
-          </div>
+            <h2 className="card-title">Movie Binge</h2>{" "}
+            {/* Title moved to bottom */}
+          </motion.div>
         </div>
         <div className="projects-info">
           <InfoCard />
