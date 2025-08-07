@@ -14,27 +14,50 @@ import { Robot } from "../assets/models/Robot";
 import sun from "../assets/images/sunset-sun.png";
 
 // Staggered animation for text
-const AnimatedText = ({ text, delay = 0 }) => {
+const AnimatedText = ({ text, delay = 0, highlightWords = [] }) => {
   const words = text.split(" ");
 
   return (
     <span>
-      {words.map((word, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{
-            duration: 0.5,
-            delay: delay + index * 0.1,
-            ease: "easeOut",
-          }}
-          style={{ display: "inline-block", marginRight: "0.3em" }}
-        >
-          {word}
-        </motion.span>
-      ))}
+      {words.map((word, index) => {
+        const cleanWord = word.replace(/[.,!?;]/g, "").toLowerCase();
+        const isHighlighted = highlightWords.includes(cleanWord);
+
+        return (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.5,
+              delay: delay + index * 0.1,
+              ease: "easeOut",
+            }}
+            whileHover={
+              isHighlighted
+                ? {
+                    scale: 1.1,
+                    color: "#a855f7",
+                    textShadow: "0 0 15px rgba(168, 85, 247, 0.8)",
+                  }
+                : {}
+            }
+            style={{
+              display: "inline-block",
+              marginRight: "0.3em",
+              color: isHighlighted ? "#9333ea" : "inherit",
+              fontWeight: isHighlighted ? "600" : "inherit",
+              textShadow: isHighlighted
+                ? "0 0 10px rgba(147, 51, 234, 0.5)"
+                : "none",
+              cursor: isHighlighted ? "pointer" : "default",
+            }}
+          >
+            {word}
+          </motion.span>
+        );
+      })}
     </span>
   );
 };
@@ -117,13 +140,33 @@ const Hero = () => {
 
           <div className="about-me-row">
             {[
-              { text: "Where creativity meets code.", delay: 0 },
-              { text: "Crafting thoughtful digital solutions", delay: 0.6 },
-              { text: "Balancing aesthetics with function", delay: 0.9 },
-              { text: "Thats it.", delay: 1.2 },
+              {
+                text: "Where creativity meets code.",
+                delay: 0,
+                highlightWords: ["creativity"],
+              },
+              {
+                text: "Crafting thoughtful digital solutions",
+                delay: 0.6,
+                highlightWords: [],
+              },
+              {
+                text: "Balancing aesthetics with function",
+                delay: 0.9,
+                highlightWords: ["aesthetics", "function"],
+              },
+              {
+                text: "Thats it.",
+                delay: 1.2,
+                highlightWords: [],
+              },
             ].map((item, index) => (
               <h3 key={index} className="about-me-text">
-                <AnimatedText text={item.text} delay={item.delay} />
+                <AnimatedText
+                  text={item.text}
+                  delay={item.delay}
+                  highlightWords={item.highlightWords}
+                />
                 {/* Staggered border animations */}
                 <motion.div
                   className="border"

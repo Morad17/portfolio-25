@@ -1,18 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-import full from "../assets/images/sunset-full.png";
-import sun from "../assets/images/sunset-sun.png";
-import horizon from "../assets/images/sunset-horizon.png";
-import mountain from "../assets/images/sunset-mountain.png";
-import mountains from "../assets/images/sunset-mountains.png";
-import foreground from "../assets/images/sunset-foreground.png";
-//test scene 2
+import selfie from "../assets/images/self-image.jpg";
 import sceneForeground from "../assets/images/sForeground.png";
 import sceneMoon from "../assets/images/scene-moon-2.png";
 import sceneMountain1 from "../assets/images/sMountain1.png";
 import sceneMountain2 from "../assets/images/sMountain2.png";
 import Particles from "./ParticleAnimation";
+import { GithubLogo } from "../assets/models/GithubLogo";
+import { ReactLogo } from "../assets/models/ReactLogo";
+import { Canvas } from "@react-three/fiber";
+import { Environment } from "@react-three/drei";
 
 const About = () => {
   const ref = useRef();
@@ -98,16 +96,16 @@ const About = () => {
 
   return (
     <div className="about page" ref={ref}>
-      {/* Dynamic background that progressively replaces blue */}
+      {/* Dynamic sunset background*/}
       <motion.div
         className="background-wrapper"
         style={{
           background: backgroundColor,
-          position: "fixed", // Changed to fixed
+          position: "fixed",
           top: 0,
           left: 0,
-          width: "100vw", // Full viewport width
-          height: "100vh", // Full viewport height
+          width: "100vw",
+          height: "100vh",
           zIndex: -10,
         }}
       >
@@ -115,17 +113,6 @@ const About = () => {
       </motion.div>
 
       <div className="sunset-parallax">
-        <motion.p className="background-text" style={{ y: textY }}>
-          Hi I'm Morad, a frontend developer from the UK. Aesthetics,
-          Application and Avant-garde are factors I consider most when designing
-          projects. My tools of choice are primarily React, Scss & Node, with
-          others implemented based on the project. If you have a project in
-          mind, or a killer idea send me a message!
-        </motion.p>
-        {/* <motion.div
-          className="sunset-horizon"
-          style={{ backgroundImage: `url(${sHorizon})`, y: sHorizonY }}
-        /> */}
         <motion.div
           className="sunset-slide"
           style={{ backgroundImage: `url(${sceneMountain1})`, y: sMountainY1 }}
@@ -140,11 +127,50 @@ const About = () => {
             backgroundImage: `url(${sceneForeground})`,
             y: sForegroundY,
           }}
-        />{" "}
-        {/* <motion.div
-          className="sunset-foreground"
-          style={{ backgroundImage: `url(${sMou})`, y: sMountain }}
-        /> */}
+        />
+        <div className="content-div">
+          <div className="left-div">
+            <motion.p className="background-text" style={{ y: textY }}>
+              Hi I'm Morad, a frontend developer from the UK. Aesthetics,
+              Application and Avant-garde are factors I consider most when
+              designing projects. My tools of choice are primarily React, Scss &
+              Node, with others implemented based on the project. If you have a
+              project in mind, or a killer idea send me a message!
+            </motion.p>
+          </div>
+          <div className="center-div">
+            <img className="selfie-image" src={selfie} alt="" />
+          </div>
+          <div className="right-div">
+            <motion.div className="models-row">
+              <motion.div
+                animate={{ y: [0, -30, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Canvas
+                  camera={{ position: [1, 1, 1] }}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <Environment preset="warehouse" />
+                  <ReactLogo
+                    scale={[1.75, 1.75, 1.75]}
+                    position={[0, -2, 0]}
+                    rotation={[0, 0, 0]}
+                  />
+                  <GithubLogo
+                    scale={[1.75, 1.75, 1.75]}
+                    position={[0, -2, 0]}
+                    rotation={[0, 0, 0]}
+                  />
+                </Canvas>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );
