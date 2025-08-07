@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion"; // Add this import
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { IoIosPerson } from "react-icons/io";
 import { Link } from "react-router";
 
@@ -15,14 +15,36 @@ import aiSvg from "../assets/svg/ai-svg.svg";
 import questionSvg from "../assets/svg/question-svg.svg";
 import emailSvg from "../assets/svg/email-svg.svg";
 import securitySvg from "../assets/svg/security-svg.svg";
-import mobileSvg from "../assets/svg/mobile-svg.svg";
+import mobileSvg from "../assets/svg/responsive.svg";
 import blogSvg from "../assets/svg/blog.svg";
-import authSvg from "../assets/svg/auth.svg";
+import authSvg from "../assets/svg/auth-svg.svg";
 import saveSvg from "../assets/svg/save.svg";
 import starSvg from "../assets/svg/star.svg";
+import hostingSvg from "../assets/svg/hosting.svg";
 
 const Projects = () => {
   const [project, setProject] = useState("horizonProject");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef(null);
+
+  // Track mouse position within the container
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+      return () => container.removeEventListener("mousemove", handleMouseMove);
+    }
+  }, []);
 
   // Create SVG mapping object
   const svgMap = {
@@ -35,6 +57,7 @@ const Projects = () => {
     authSvg,
     saveSvg,
     starSvg,
+    hostingSvg,
   };
 
   // Project data structure
@@ -47,11 +70,13 @@ const Projects = () => {
       infoPoints: [
         { svgKey: "authSvg", text: "User Authentication" },
         { svgKey: "starSvg", text: "Rate & Review System" },
-        { svgKey: "saveSvg", text: "Save,Like & Bookmark feature" },
+        { svgKey: "saveSvg", text: "Like & Bookmark feature" },
         { svgKey: "securitySvg", text: "Account Privacy" },
         { svgKey: "mobileSvg", text: "Responsive Design" },
+        { svgKey: "hostingSvg", text: "Web & Domain Hosting" },
       ],
       url: "https://horizon-sales.co.uk/",
+      color: "rgba(0, 0, 0,0.8)",
     },
     movieBingeProject: {
       title: "Movie Binge",
@@ -64,8 +89,10 @@ const Projects = () => {
         { svgKey: "questionSvg", text: "Page Questionnaire" },
         { svgKey: "securitySvg", text: "Secured Webpage" },
         { svgKey: "mobileSvg", text: "Mobile Friendly" },
+        { svgKey: "hostingSvg", text: "Web & Domain Hosting" },
       ],
       url: "https://movie-binge-app.netlify.app/",
+      color: "rgba(136, 0, 21,0.8)",
     },
   };
 
@@ -73,44 +100,131 @@ const Projects = () => {
   const currentProject = projectsData[project];
 
   const InfoCard = () => (
-    <div className="project-info-container">
-      <div className="info-title-container">
+    <div className="project-info-container" ref={containerRef}>
+      <div
+        className="magic-light"
+        style={{
+          left: mousePosition.x - 150,
+          top: mousePosition.y - 150,
+        }}
+      />
+
+      <motion.div
+        className="info-title-container magic-item"
+        key={`title-${project}`} // Force re-render
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        whileHover={{
+          y: -5,
+          background: `linear-gradient(135deg, ${currentProject.color} 100%, transparent 100%)`,
+        }}
+      >
         <h2 className="info-title">{currentProject.title}</h2>
-      </div>
-      <div className="info-content">
+      </motion.div>
+
+      <motion.div
+        className="info-content"
+        key={`content-${project}`}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <div className="container-left">
-          <div className="gif-container">
+          <motion.div
+            className="gif-container magic-item"
+            initial={{
+              background:
+                "linear-gradient(135deg, rgba(147, 51, 234, 0.3) 0%, transparent 0%)",
+            }}
+            whileHover={{
+              y: -5,
+              background:
+                "linear-gradient(135deg, rgba(147, 51, 234, 0.3) 100%, transparent 100%)",
+            }}
+            transition={{
+              duration: 0.9,
+              ease: "easeInOut",
+            }}
+          >
             <img
               className="thumb"
               src={currentProject.gifLink}
               alt={currentProject.title}
             />
-          </div>
-          <div className="info-text-container">
+          </motion.div>
+
+          <motion.div
+            className="info-text-container magic-item"
+            initial={{
+              background: `linear-gradient(135deg, ${currentProject.color} 0%, transparent 0%)`,
+            }}
+            whileHover={{
+              y: -5,
+              background: `linear-gradient(135deg, ${currentProject.color} 100%, transparent 100%)`,
+            }}
+            transition={{
+              duration: 0.9,
+              ease: "easeInOut",
+            }}
+          >
             <p className="info-text">{currentProject.infoText}</p>
-          </div>
+          </motion.div>
         </div>
+
         <div className="container-right">
           <div className="info-points">
             {currentProject.infoPoints.map((point, index) => (
-              <div key={index} className="info-point">
+              <motion.div
+                key={index}
+                className="info-point magic-item"
+                initial={{
+                  background: `linear-gradient(135deg, ${currentProject.color} 0%, transparent 0%)`,
+                }}
+                whileHover={{
+                  y: -5,
+                  background: `linear-gradient(135deg, ${currentProject.color} 100%, transparent 100%)`,
+                }}
+                transition={{
+                  duration: 0.9,
+                  ease: "easeInOut",
+                }}
+              >
                 <img className="info-svgs" src={svgMap[point.svgKey]} alt="" />
                 <p>{point.text}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
-      <div className="button-container">
-        <Link
-          to={currentProject.url}
+      </motion.div>
+
+      <motion.div
+        className="button-container magic-item"
+        key={`button-${project}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.4 }}
+      >
+        <motion.a
+          href={currentProject.url}
           className="btn-link"
           target="_blank"
           rel="noopener noreferrer"
+          initial={{
+            background: `linear-gradient(135deg, ${currentProject.color} 0%, transparent 0%)`,
+          }}
+          whileHover={{
+            y: -5,
+            background: `linear-gradient(135deg, ${currentProject.color} 100%, transparent 100%)`,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: "easeInOut",
+          }}
         >
           Live Page
-        </Link>
-      </div>
+        </motion.a>
+      </motion.div>
     </div>
   );
 
@@ -175,8 +289,7 @@ const Projects = () => {
                 }}
               />
             </div>
-            <h2 className="card-title">Movie Binge</h2>{" "}
-            {/* Title moved to bottom */}
+            <h2 className="card-title">Movie Binge</h2>
           </motion.div>
         </div>
         <div className="projects-info">

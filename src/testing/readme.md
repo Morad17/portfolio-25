@@ -58,3 +58,17 @@ rotation-y={rotationY} -->
           </motion.h2>
         </div>
       </div> -->
+
+//Spring bg color change animation
+
+whileHover={{
+    y: -5,
+    scale: 1.02,
+    backgroundColor: "rgba(147, 51, 234, 0.15)",
+    boxShadow: "0 10px 30px rgba(147, 51, 234, 0.3)"
+  }}
+transition={{
+    duration: 0.3,
+    type: "spring",
+    stiffness: 300
+  }}
