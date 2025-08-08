@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { IoIosPerson } from "react-icons/io";
 import { Link } from "react-router";
 
@@ -26,6 +26,17 @@ const Projects = () => {
   const [project, setProject] = useState("horizonProject");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
+  const titleRef = useRef(null); // Add ref for title
+
+  // Scroll-based animation for title
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start end", "end start"],
+  });
+
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+  const dividerScale = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
 
   // Track mouse position within the container
   useEffect(() => {
@@ -230,10 +241,21 @@ const Projects = () => {
 
   return (
     <div className="projects page">
-      <h2 className="title">Previous Work</h2>
-      <p className="title-caption">Select a project</p>
+      <motion.div
+        className="page-title-div"
+        ref={titleRef}
+        style={{ opacity: titleOpacity, y: titleY }}
+      >
+        <h2 className="title">Previous Work.</h2>
+        <motion.div
+          className="divider-line"
+          style={{ scaleX: dividerScale, transformOrigin: "left" }}
+        />
+      </motion.div>
+
       <div className="projects-content">
         <div className="project-cards">
+          <h2 className="title-caption">Select a project</h2>
           <motion.div
             className={`card card-1 ${
               project === "horizonProject" ? "active" : ""

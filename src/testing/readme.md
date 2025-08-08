@@ -72,3 +72,33 @@ transition={{
     type: "spring",
     stiffness: 300
   }}
+
+//React 3d model icon
+
+motion.div className="models-row">
+<!-- <motion.div
+                animate={{ y: [0, -30, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Canvas
+                  camera={{ position: [1, 1, 1] }}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <Environment preset="warehouse" />
+                  <ReactLogo
+                    scale={[1.75, 1.75, 1.75]}
+                    position={[0, -2, 0]}
+                    rotation={[0, 0, 0]}
+                  />
+                  <GithubLogo
+                    scale={[1.75, 1.75, 1.75]}
+                    position={[0, -2, 0]}
+                    rotation={[0, 0, 0]}
+                  />
+                </Canvas>
+              </motion.div>
+            </motion.div -->

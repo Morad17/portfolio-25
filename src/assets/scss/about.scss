@@ -4,6 +4,25 @@
   min-height: 100vh;
   width: 100%;
 
+  .page-title-div {
+    position: absolute;
+    top: 2rem;
+    left: 5rem;
+    z-index: 15;
+
+    .title {
+      padding: 0;
+      font-size: 45px;
+      margin: 0 0 0 10px;
+    }
+
+    .divider-line {
+      width: 70vw;
+      background: linear-gradient(to bottom, #3588c2 0%, #9333ea 100%);
+      height: 10px;
+    }
+  }
+
   .background-wrapper {
     position: absolute !important;
     top: 0 !important;
@@ -19,21 +38,43 @@
     z-index: 1;
     display: flex;
   }
-  q .content-div {
+  .content-div {
+    position: relative;
+    z-index: 10;
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    box-sizing: border-box;
-
-    .content-wrapper {
+    justify-content: space-between;
+    padding: 0 0rem;
+    gap: 10rem;
+    .left-div {
+      flex: 1;
       display: flex;
-      width: 100%;
-      max-width: 1200px;
-      height: 100%;
-      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+
+      .background-text {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        color: white;
+        text-align: left;
+        max-width: 600px;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .right-div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      h2 {
+        color: white;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
     }
   }
   .selfie-image {
@@ -42,5 +83,41 @@
     border: 2px solid white;
   }
   .right-div {
+    canvas,
+    div {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+  .about-me-text {
+    margin: 10px 0;
+    font-size: 26px;
+    line-height: 1.3;
+    position: relative;
+    width: fit-content;
+    min-height: 1.3em; // Prevent layout shift
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 22px;
+    }
+  }
+  .border {
+    background: linear-gradient(
+      to bottom,
+      #3588c2 0%,
+      #2a5a8a 33%,
+      #9333ea 75%,
+      #9333ea 100%
+    );
+    width: 100%;
+    height: 128%;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    z-index: -1;
   }
 }
