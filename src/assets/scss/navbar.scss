@@ -1,9 +1,7 @@
 .main-nav {
-  background-color: rgba(0, 0, 0, 0.3);
   height: 100vh;
   width: 6rem;
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 11111;
@@ -13,19 +11,65 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   .nav-logo {
     color: white;
-    margin-top: 10vh;
+    font-size: 30px;
+    cursor: pointer;
   }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-top: 2rem;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+
+    .burger-line {
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      border-radius: 2px;
+      transform-origin: center;
+      display: block;
+    }
+  }
+
   .main-nav-links {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     list-style: none;
-    padding: 0;
+    padding: 2rem 0;
+    margin-top: auto;
+    gap: 1rem;
+
+    li {
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
     .link {
       text-decoration: none;
-      color: rgb(0, 0, 0);
+      color: white;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #9333ea;
+      }
     }
   }
 }
