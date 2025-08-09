@@ -162,11 +162,11 @@ const About = () => {
         ref={titleRef}
         style={{ opacity: titleOpacity, y: titleY }}
       >
+        <h2 className="title">About Me.</h2>{" "}
         <motion.div
           className="divider-line"
           style={{ scaleX: dividerScale, transformOrigin: "left" }}
         />
-        <h2 className="title">About Me.</h2>
       </motion.div>
       {/* Dynamic sunset background*/}
       <motion.div
