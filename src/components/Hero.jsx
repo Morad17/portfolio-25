@@ -93,7 +93,7 @@ const Hero = () => {
   const marqueeX2 = useTransform(marqueeProgress, [0, 1], ["-50%", "100%"]);
 
   return (
-    <div className="hero page" ref={ref}>
+    <div id="home" className="hero page" ref={ref}>
       <div className="background-wrapper"></div>
       {/* Sun Animation */}
       <motion.div

@@ -54,7 +54,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="contact-us">
+    <div id="contact" className="contact-us">
       <div className="background-wrapper"></div>
       <motion.div
         className="page-title-div"

@@ -156,7 +156,7 @@ const About = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
 
   return (
-    <div className="about page" ref={ref}>
+    <div id="about" className="about page" ref={ref}>
       <motion.div
         className="page-title-div"
         ref={titleRef}

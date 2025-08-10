@@ -240,7 +240,7 @@ const Projects = () => {
   );
 
   return (
-    <div className="projects page">
+    <div id="projects" className="projects page">
       <motion.div
         className="page-title-div"
         ref={titleRef}
