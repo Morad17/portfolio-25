@@ -18,14 +18,13 @@ const Home = () => {
       const targetY = element.offsetTop;
       const startY = window.scrollY;
       const distance = targetY - startY;
-      const duration = 2000; // 2 seconds
+      const duration = 2000;
       const startTime = performance.now();
 
       const animateScroll = (currentTime) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        // Cubic bezier easing (0.25, 0.1, 0.25, 1) - very smooth
         const easeProgress =
           progress < 0.5
             ? 2 * progress * progress
@@ -57,11 +56,9 @@ const Home = () => {
       const currentIndex = sections.indexOf(activeSection);
 
       if (e.deltaY > 0 && currentIndex < sections.length - 1) {
-        // Scroll down
         e.preventDefault();
         scrollToSection(sections[currentIndex + 1]);
       } else if (e.deltaY < 0 && currentIndex > 0) {
-        // Scroll up
         e.preventDefault();
         scrollToSection(sections[currentIndex - 1]);
       }
@@ -69,7 +66,7 @@ const Home = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [activeSection, isScrolling]);
+  }, [activeSection, isScrolling, sections, scrollToSection]); // Add dependencies
 
   // Track current section based on scroll position
   useEffect(() => {
@@ -97,7 +94,7 @@ const Home = () => {
     handleScroll(); // Check initial position
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrolling]);
+  }, [isScrolling, sections]); // Add sections dependency
 
   return (
     <div className="home">

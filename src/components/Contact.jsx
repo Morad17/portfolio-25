@@ -142,7 +142,8 @@ const ContactUs = () => {
             </form>
             {/* Error messages */}
             <div className="validation-message" style={{ color: "red" }}>
-              {errors.firstName && <p>{errors.name.message}</p>}
+              {errors.firstName && <p>{errors.firstName.message}</p>}{" "}
+              {/* Change from errors.name */}
               {errors.email && <p>{errors.email.message}</p>}
               {errors.message && <p>{errors.message.message}</p>}
             </div>
