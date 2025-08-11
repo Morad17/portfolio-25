@@ -21,12 +21,33 @@ const Navbar = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      const targetY = element.offsetTop;
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const duration = 2500; // 2.5 seconds - adjust this for speed
+      const startTime = performance.now();
+
+      const ease = (t) => {
+        // Smooth easing curve
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      };
+
+      const animateScroll = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = ease(progress);
+
+        const currentY = startY + distance * easedProgress;
+        window.scrollTo(0, currentY);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
+      setActiveSection(sectionId);
     }
-    setActiveSection(sectionId);
   };
 
   const toggleAudio = () => {
@@ -100,8 +121,22 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Set CSS custom property
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--nav-bg-color",
+      isOpen ? "rgba(0, 0, 0, 0.94)" : "transparent"
+    );
+  }, [isOpen]);
+
   return (
-    <nav className="main-nav">
+    <motion.nav
+      className="main-nav"
+      animate={{
+        backgroundColor: isOpen ? "rgba(0, 0, 0, 0.94)" : "rgba(0, 0, 0, 0)",
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <motion.div
         className="burger"
         onClick={toggleMenu}
@@ -192,7 +227,7 @@ const Navbar = () => {
           )}
         </motion.button>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

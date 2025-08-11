@@ -12,6 +12,15 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &.nav-open {
+    background-color: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(10px); // Add blur effect
+    -webkit-backdrop-filter: blur(10px); // Safari support
+  }
+
   .nav-logo {
     color: white;
     font-size: 30px;
@@ -102,5 +111,11 @@
     width: 32px;
     height: 32px;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .main-nav {
+    // background: #000000f0;
   }
 }

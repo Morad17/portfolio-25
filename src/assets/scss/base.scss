@@ -60,6 +60,34 @@ body {
   }
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: $nightDarkPurple; /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #3588c2 0%,
+    #9333ea 100%
+  ); /* Same as your divider */
+  border-radius: 10px;
+  border: 2px solid $nightDarkPurple; /* Border around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    #9333ea 0%,
+    #3588c2 100%
+  ); /* Reversed gradient on hover */
+}
+
 @import "./navbar";
 @import "./home";
 @import "./about";

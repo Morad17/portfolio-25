@@ -202,7 +202,7 @@ const Projects = () => {
                 }}
               >
                 <img className="info-svgs" src={svgMap[point.svgKey]} alt="" />
-                <p>{point.text}</p>
+                <p className="point-text">{point.text}</p>
               </motion.div>
             ))}
           </div>

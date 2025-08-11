@@ -95,14 +95,6 @@
     position: relative;
     width: fit-content;
     min-height: 1.3em; // Prevent layout shift
-
-    @media (max-width: 768px) {
-      font-size: 28px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 22px;
-    }
   }
   .border {
     background: linear-gradient(
@@ -118,5 +110,31 @@
     top: -5px;
     left: -5px;
     z-index: -1;
+  }
+}
+@media (max-width: 768px) {
+  .about {
+    .about-me-text {
+      font-size: 28px;
+    }
+    .content-div {
+      .right-div {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    .about-me-text {
+      font-size: 19px;
+    }
+    .page-title-div .title {
+      font-size: 22px;
+    }
+    .about-me-row {
+      width: 90%;
+    }
   }
 }
