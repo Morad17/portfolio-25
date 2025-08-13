@@ -193,9 +193,19 @@
 // Macbook responsive
 @media (max-width: 1440px) {
   .home {
+    overflow: hidden;
     .sunset-sun {
       right: -15rem;
       top: -30vh;
+    }
+  }
+  .hero{
+    .about-me-text{
+      font-size: 45px;
+    }
+    .title{
+      margin-top: 0;
+    margin-left: 5rem;
     }
   }
 }
