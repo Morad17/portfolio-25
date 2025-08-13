@@ -1,14 +1,12 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef,} from "react";
 import {
   motion,
   useScroll,
   useTransform,
   useSpring,
-  useMotionValueEvent,
 } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
-import { Spaceman } from "../assets/models/Spaceman";
+import { Environment } from "@react-three/drei";
 import { Robot } from "../assets/models/Robot";
 
 import sun from "../assets/images/sunset-sun.png";

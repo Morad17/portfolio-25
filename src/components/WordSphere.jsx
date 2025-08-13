@@ -32,7 +32,12 @@ const WordSphere = () => {
     };
     const ref = useRef();
     const [hovered, setHovered] = useState(false);
-    const over = (e) => (e.stopPropagation(), setHovered(true));
+    
+    const over = (e) => {
+      e.stopPropagation();
+      setHovered(true);
+    };
+    
     const out = () => setHovered(false);
 
     useEffect(() => {

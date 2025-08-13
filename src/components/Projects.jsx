@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { IoIosPerson } from "react-icons/io";
-import { Link } from "react-router";
 
 //logo
 import hLogo from "../assets/images/horizon-sales-logo.png";

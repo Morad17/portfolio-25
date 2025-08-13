@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Projects from "../components/Projects";
@@ -8,9 +8,9 @@ const Home = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolling, setIsScrolling] = useState(false);
 
-  const sections = ["home", "about", "projects", "contact"];
+  const sections = useMemo(() => ["home", "about", "projects", "contact"], []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       setIsScrolling(true);
@@ -43,7 +43,7 @@ const Home = () => {
       requestAnimationFrame(animateScroll);
       setActiveSection(sectionId);
     }
-  };
+  }, []); 
 
   // Wheel-based snap scrolling
   useEffect(() => {
@@ -66,7 +66,7 @@ const Home = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [activeSection, isScrolling, sections, scrollToSection]); // Add dependencies
+  }, [activeSection, isScrolling, sections, scrollToSection]);
 
   // Track current section based on scroll position
   useEffect(() => {
@@ -94,7 +94,7 @@ const Home = () => {
     handleScroll(); // Check initial position
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrolling, sections]); // Add sections dependency
+  }, [isScrolling, sections]);
 
   return (
     <div className="home">

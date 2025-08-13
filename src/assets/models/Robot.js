@@ -8,16 +8,16 @@ Title: Animated ROBOT SDC
 
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useSpring, animated } from "@react-spring/three";
+import { animated } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Vector2, Vector3 } from "three";
+import { Vector2} from "three";
 import robot from "./animated_robot_sdc.glb";
 
 export function Robot(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(robot);
   const { actions } = useAnimations(animations, group);
-  const { camera, size } = useThree();
+  const { size } = useThree();
   const [mouse, setMouse] = useState(new Vector2());
   const headBone = useRef();
 

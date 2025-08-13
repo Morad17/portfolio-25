@@ -1,39 +1,38 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-import selfie from "../assets/images/self-image.jpg";
 import sceneForeground from "../assets/images/sForeground.png";
-import sceneMoon from "../assets/images/scene-moon-2.png";
 import sceneMountain1 from "../assets/images/sMountain1.png";
 import sceneMountain2 from "../assets/images/sMountain2.png";
 import Particles from "./ParticleAnimation";
-import { GithubLogo } from "../assets/models/GithubLogo";
-import { ReactLogo } from "../assets/models/ReactLogo";
-import { Canvas } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
 import WordSphere from "./WordSphere";
 
 const About = () => {
   const ref = useRef(); // Main about section ref
   const titleRef = useRef(); // Separate ref for title
   const [isInView, setIsInView] = useState(false);
+  const [shouldRenderCanvas, setShouldRenderCanvas] = useState(false);
 
   // Intersection Observer to track when About section is in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
+        // Only render canvas when section is visible
+        setShouldRenderCanvas(entry.isIntersecting);
       },
       { threshold: 0.1 } // Trigger when 10% of About section is visible
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current; 
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -153,7 +152,6 @@ const About = () => {
   const sMountainY1 = useTransform(scrollYProgress, [0, 1], ["0%", "90%"]);
   const sMountainY2 = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
   const sForegroundY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
 
   return (
     <div id="about" className="about page" ref={ref}>
@@ -270,7 +268,7 @@ const About = () => {
             </div>
           </div>
           <div className="right-div">
-            <WordSphere />
+            {shouldRenderCanvas && <WordSphere />}
           </div>
         </div>
       </div>

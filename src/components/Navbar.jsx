@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 import music from "../assets/sounds/ambient-music.mp3";
 import mute from "../assets/svg/mute-black.svg";
 import play from "../assets/svg/play-audio-black.svg";
-import { useStore } from "@react-three/fiber";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isPlaying, setIsPlaying] = useState(true); // Start as true for auto-play
   const audioRef = React.useRef(null);
-  const [audio, setAudio] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -179,6 +176,7 @@ const Navbar = () => {
       >
         <li>
           <a
+            href="#"
             className={`link ${activeSection === "home" ? "active" : ""}`}
             onClick={() => scrollToSection("home")}
           >
@@ -187,6 +185,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
+          href="#"
             className={`link ${activeSection === "about" ? "active" : ""}`}
             onClick={() => scrollToSection("about")}
           >
@@ -195,6 +194,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
+          href="#"
             className={`link ${activeSection === "projects" ? "active" : ""}`}
             onClick={() => scrollToSection("projects")}
           >
@@ -203,6 +203,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
+          
             className={`link ${activeSection === "contact" ? "active" : ""}`}
             onClick={() => scrollToSection("contact")}
           >

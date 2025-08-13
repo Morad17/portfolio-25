@@ -5,8 +5,6 @@ License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
 Source: https://sketchfab.com/3d-models/react-logo-circle-540ff21ac0f54a038df6f634c7cce726
 Title: React logo circle
 */
-
-import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import model from "./react_logo_circle.glb";
 

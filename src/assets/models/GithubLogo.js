@@ -6,7 +6,6 @@ Source: https://sketchfab.com/3d-models/github-b2bd1d8290e44ce49e7e41dd495592b5
 Title: GitHub
 */
 
-import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import model from "./github.glb";
 
