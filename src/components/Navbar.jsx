@@ -176,7 +176,7 @@ const Navbar = () => {
       >
         <li>
           <a
-            href="#"
+            href="#home"
             className={`link ${activeSection === "home" ? "active" : ""}`}
             onClick={() => scrollToSection("home")}
           >
@@ -185,7 +185,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
-          href="#"
+            href="#about"
             className={`link ${activeSection === "about" ? "active" : ""}`}
             onClick={() => scrollToSection("about")}
           >
@@ -194,7 +194,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
-          href="#"
+            href="#projects"
             className={`link ${activeSection === "projects" ? "active" : ""}`}
             onClick={() => scrollToSection("projects")}
           >
@@ -203,7 +203,7 @@ const Navbar = () => {
         </li>
         <li>
           <a
-          
+            href="#contact"
             className={`link ${activeSection === "contact" ? "active" : ""}`}
             onClick={() => scrollToSection("contact")}
           >
