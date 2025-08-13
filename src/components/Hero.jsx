@@ -106,7 +106,7 @@ const Hero = () => {
         <div className="center-row">
           <div className="title-row" ref={titleRef}>
             <h2 className="title">
-              <AnimatedText text="Morad Inc" delay={1} />
+              <AnimatedText text="Morad Ink" delay={1} />
               {/* Animated border */}
               <motion.div
                 className="border"
