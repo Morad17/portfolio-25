@@ -179,6 +179,15 @@
 // Macbook responsive
 @media (max-width: 1440px) {
   .projects {
+    .info-point{
+      font-size: 18px;
+    }
+    .info-text{
+      font-size: 16px;
+    }
+    .project-info-container{
+      height:87vh
+    }
     .container-right {
       width: 35%;
       .point-text {
